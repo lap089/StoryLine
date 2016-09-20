@@ -1,0 +1,43 @@
+<style>
+h4 {
+        border-bottom: 1px solid;
+        padding-bottom: 2px;
+        border-color: #3FB461 #3FB461 #3FB461;
+        font-weight: bold;
+    }
+
+</style>
+
+
+<div class="section">
+
+    <div class="container">
+
+        <div class="row">
+        <div class="col-md-2">
+            <img  height=100px ng-src="{{data.avatar}}">
+        </div>
+        <div class="col-md-8">
+                <h4 style="text-align:center"> {{data.name}}</h4>
+                <p id="summary" class=ellipsis style="text-align:center; height:100px; overflow: auto;  word-wrap: break-word;" >{{data.summary}}</p>
+        </div>
+        <div class="col-md-2">
+          <div class="pull-left" ng-dropdown-multiselect options="characterNodes" selected-model="listSelectedNodes" extra-settings="enableSearchSetting"
+          events="selectEvent" translation-texts="buttonText"></div>
+        </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.section -->
+
+
+
+<div id="chart"></div>
+
+
+
+</div>
+<!-- /.container -->
