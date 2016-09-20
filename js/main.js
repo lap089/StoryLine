@@ -61,16 +61,26 @@ var sankey = d3.sankey()
 
 var path = sankey.link();
 
-$scope.selectEvent = {onItemSelect: function(item) {console.log(item);}}
+jQuery.fn.d3Click = function () {
+  this.each(function (i, e) {
+    var evt = new MouseEvent("click");
+    e.dispatchEvent(evt);
+  });
+};
 
+$scope.characterNodes = [];
+$scope.listSelectedNodes = [];
+$scope.selectEvent = {onItemSelect: mulSelect, onItemDeselect: mulSelect, onDeselectAll: function() {$scope.listSelectedNodes.forEach(mulSelect);}};
 $scope.data = {
   "avatar": "http://vignette3.wikia.nocookie.net/disney/images/1/13/Toy_Story.jpg/revision/latest/scale-to-width-down/516?cb=20151003163558",
   "name": "Toy Story",
   "summary": "The story begins with a young boy named Andy Davis playing with his toys, such as a Mr. Potato Head toy, Slinky Dog, a plastic dinosaur named Rex and his favorite toy, Woody, a cowboy doll. He pretends Potato Head is a villain for which Woody must try to defeat. He takes Woody into the living room and plays with him some more, with a short interruption talking to his mother about his birthday party later that day and the upcoming move to a new house. After playing with Woody, Andy starts helping his mother by taking his baby sister, Molly, to her. While he's away, all of the toys come to life."
 };
 
-$scope.characterNodes = [];
-$scope.listSelectedNodes = [];
+function mulSelect(item) {
+  console.log(item.name + " selected");
+  $("#node-"+item.name.replace(" ","")).d3Click();
+}
 
 d3.json("ToyStory.json", function(storyData) {
 
